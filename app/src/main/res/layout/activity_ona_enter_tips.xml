@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/hollywood_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_c8">
+
+            <ImageView
+                android:id="@+id/arrow_right"
+                style="@style/icon32"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/title_icon_forward"/>
+
+            <ImageView
+                android:id="@+id/vip_icon"
+                style="@style/icon40"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/game_hot_icon"/>
+
+            <com.sun.views.ScrollTextView
+                android:id="@+id/tv_tips"
+                style="@style/t28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_toLeftOf="@id/arrow_right"
+                android:layout_toRightOf="@id/vip_icon"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0px"
+                android:maxLines="1"
+                android:textColor="@color/c1"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</merge>

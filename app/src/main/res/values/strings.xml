@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Sun Demo</string>
+    <string name="action_settings">settings</string>
+    <string name="preference_name">_preferences</string>
+    <string name="reset">重置</string>
+    <string name="clear">清除</string>
+    <string name="current_percent">current percent = %1$d</string>
+    <string name="three_dogs">Three dogs!</string>
+    <string name="scroll_text_one">衣带渐宽终不悔，为伊消得人憔悴</string>
+    <string name="scroll_text_two">山有木兮木有枝，心悦君兮知不知</string>
+    <string name="scroll_text_three">此去经年，应是良辰好景虚设。便纵有，千种风情，更与何人说</string>
+    <string name="three_dot_default">...</string>
+    <string name="add">增加</string>
+    <string name="remove">移除</string>
+    <string name="sp_saved_number">上次保存的数字为%1$d</string>
+</resources>

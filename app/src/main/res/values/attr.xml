@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 自定义刮奖效果view -->
+    <declare-styleable name="ScratchView">
+        <attr name="maskColor" format="color|reference"/>
+        <attr name="eraseSize" format="float"/>
+        <attr name="waterMark" format="reference"/>
+    </declare-styleable>
+</resources>

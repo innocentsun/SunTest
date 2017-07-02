@@ -1,0 +1,124 @@
+import com.android.builder.core.DefaultManifestParser
+
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('signing.jks')
+            storePassword 'tt910614'
+            keyAlias 'sunhzchen'
+            keyPassword 'tt910614'
+        }
+    }
+
+    packagingOptions {
+        exclude '*.apk'
+    }
+
+    dexOptions {
+        javaMaxHeapSize '4096M'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+
+    defaultConfig {
+        applicationId "com.sun.test"
+        minSdkVersion 21
+        targetSdkVersion 21
+        multiDexEnabled true
+        versionCode getBuildVersionCode()
+        versionName getBuildVersionName()
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['autogen', 'src/main']
+            resources.srcDirs = ['autogen', 'src/main']
+            aidl.srcDirs = ['autogen', 'src/main']
+            renderscript.srcDirs = ['autogen', 'src/main']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                def file = output.outputFile
+                def manifestParser = new DefaultManifestParser(android.sourceSets.main.manifest.srcFile)
+                def namePrefix = "";
+                if (project.hasProperty("apkFileNamePrefix")) {
+                    namePrefix = apkFileNamePrefix;
+                }
+                output.outputFile = new File(file.parent, namePrefix + "NewApp_V" + manifestParser.getVersionName() + "_" + variant.buildType.name + ".apk")
+            }
+        }
+
+        debug {
+            signingConfig signingConfigs.release
+            debuggable true
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            minifyEnabled true
+            shrinkResources false
+            proguardFile 'proguard.cfg'
+        }
+    }
+
+    productFlavors {
+
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs' //this way we can find the .aar file in libs folder
+    }
+
+    repositories {
+        jcenter()
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile(name: 'appcompat-v7-24.0.0-beta1', ext: 'aar')
+    compile(name: 'recyclerview-v7-22.2.0', ext: 'aar')
+    compile(name: 'cardview-v7-23.0.1', ext: 'aar')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+}
+
+def getBuildVersionCode() {
+    def manifestParser = new DefaultManifestParser(android.sourceSets.main.manifest.srcFile)
+    return manifestParser.getVersionCode()
+}
+
+def getBuildVersionName() {
+    def manifestParser = new DefaultManifestParser(android.sourceSets.main.manifest.srcFile)
+    return manifestParser.getVersionName()
+}
